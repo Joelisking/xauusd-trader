@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(uv init:*)",
+      "Bash(uv add:*)",
+      "Bash(uv run:*)",
+      "Bash(wc:*)"
+    ]
+  }
+}

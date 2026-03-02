@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# MQL5 compiled
+*.ex5
+*.ex4
+
+# Model weights (use Git LFS)
+models/*.h5
+models/*.json
+models/*.pkl
+models/*.xgb
+
+# Logs
+logs/
+
+# Backtest results
+backtest_results/
+
+# Environment / secrets
+.env
+.env.*
+credentials.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files
+data/
+*.parquet
+
+# Jupyter
+.ipynb_checkpoints/
