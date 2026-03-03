@@ -1,0 +1,18 @@
+; Gold Scalper EA — MT5 Strategy Tester Settings
+; Symbol: XAUUSD, Period: M1, Mode: Every Tick
+; Test period: 2020-01-01 to 2024-12-31
+; Spread: Fixed 20 points (2 pips) or Use real spreads
+; Slippage: 20 points (2 pips)
+
+RiskPercent=1.5
+SessionRiskCap=10.0
+SessionHaltPct=7.0
+AIMinScore=68
+MaxSpreadPips=2.0
+MaxTradeDuration=15
+BreakevenTrigger=10.0
+TrailingDistance=12.0
+HardStopPips=20.0
+TPMultiplier=1.5
+AIServerPort=5001
+MagicNumber=100001

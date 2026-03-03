@@ -1,0 +1,19 @@
+; Gold Swing Rider EA — MT5 Strategy Tester Settings
+; Symbol: XAUUSD, Period: H1, Mode: Every Tick
+; Test period: 2020-01-01 to 2024-12-31
+; Spread: Fixed 25 points (2.5 pips) or Use real spreads
+; Slippage: 20 points (2 pips)
+
+RiskPercent=2.0
+AIMinTrendScore=72
+AIExhaustionScore=45
+TP1_RR=1.5
+TP2_RR=3.0
+TP1_ClosePct=40.0
+MaxHoldHours=72
+VolumeSpikeMult=1.5
+RSI_Low=42
+RSI_High=55
+NewsBlackoutHours=4
+AIServerPort=5001
+MagicNumber=100002

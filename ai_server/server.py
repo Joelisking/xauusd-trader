@@ -24,7 +24,7 @@ from ai_server.protocol import (
     validate_entry_request,
     validate_heartbeat,
 )
-from ai_server.scoring import score_entry
+from ai_server.scoring import init_models, score_entry
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -157,6 +157,10 @@ async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWrit
 
 
 async def start_server() -> None:
+    # Load all AI models into memory before accepting connections
+    logger.info("Loading AI models...")
+    init_models()
+
     server = await asyncio.start_server(handle_client, AI_SERVER_HOST, AI_SERVER_PORT)
     addrs = ", ".join(str(s.getsockname()) for s in server.sockets)
     logger.info("AI Server listening on %s", addrs)

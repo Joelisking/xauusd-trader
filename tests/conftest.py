@@ -70,6 +70,9 @@ async def server_port(unused_tcp_port_factory) -> AsyncGenerator[int, None]:
 
 
 async def _run_server(host: str, port: int) -> None:
+    from ai_server.scoring import init_models
+    init_models()  # Load models (will enter fallback mode in tests)
+
     server = await asyncio.start_server(
         __import__("ai_server.server", fromlist=["handle_client"]).handle_client,
         host,

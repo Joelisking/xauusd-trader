@@ -17,17 +17,17 @@ env/
 *.ex5
 *.ex4
 
-# Model weights (use Git LFS)
-models/*.h5
-models/*.json
+# Model weights — tracked by Git LFS (see .gitattributes)
+# models/*.h5, models/*.json, models/*.xgb are LFS-tracked
 models/*.pkl
-models/*.xgb
 
 # Logs
 logs/
 
-# Backtest results
-backtest_results/
+# Backtest results (keep configs/)
+backtest_results/*.html
+backtest_results/*.csv
+backtest_results/*.xml
 
 # Environment / secrets
 .env
@@ -45,9 +45,8 @@ credentials.json
 .DS_Store
 Thumbs.db
 
-# Data files
-data/
-*.parquet
+# Data files — tracked by Git LFS (see .gitattributes)
+# data/*.parquet files are LFS-tracked
 
 # Jupyter
 .ipynb_checkpoints/

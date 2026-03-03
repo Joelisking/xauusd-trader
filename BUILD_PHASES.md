@@ -33,10 +33,10 @@
 | Phase 7: Feature Engineering | COMPLETE | feature_engine.py (orchestrator), price_features.py (75), derived_features.py (32), macro_features.py (20) = 127 total, feature_pipeline.py (batch), 30 tests passing |
 | Phase 8: AI Model Definitions | COMPLETE | ScalperBiLSTM, SwingBiLSTM, ScalperXGB, SwingXGB, RegimeClassifier, NFPDirectionModel, EnsembleScorer — 61 tests passing |
 | Phase 9: AI Training Pipeline | COMPLETE | label_generator.py, train_scalper.py, train_swing.py, train_regime.py, train_nfp.py, walk_forward.py (12-seg), feature_selection.py (SHAP), evaluate.py — 22 tests passing |
-| Phase 10: AI Server (Full) | NOT STARTED | |
-| Phase 11: News Shield | NOT STARTED | |
-| Phase 12: Monitoring & Alerts | NOT STARTED | |
-| Phase 13: Backtesting Framework | NOT STARTED | |
+| Phase 10: AI Server (Full) | COMPLETE | scoring.py rewritten with EnsembleScorer, init_models(), fallback mode, news risk, feature extraction. server.py loads models at startup. 13+9 tests passing |
+| Phase 11: News Shield | COMPLETE | monitoring/news_schedule.py (phase computation, schedule builder, event classification), 16 tests passing |
+| Phase 12: Monitoring & Alerts | COMPLETE | telegram_bot.py (7 alert types, rate limiting, queue), watchdog.py (AI server + system health), performance_tracker.py (SQLite + daily/weekly reports), 73 tests passing |
+| Phase 13: Backtesting Framework | COMPLETE | monte_carlo.py (DD distribution, P95/P99), stress_test.py (4 extreme periods), backtest_analyzer.py (full metrics + equity curve + MT5 CSV parser), scalper/swing .set configs, 19 tests passing |
 | Phase 14: Integration Testing | NOT STARTED | |
 | Phase 15: Demo Deployment | NOT STARTED | |
 
