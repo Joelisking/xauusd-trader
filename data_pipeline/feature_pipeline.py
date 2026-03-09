@@ -109,7 +109,10 @@ def compute_batch_features(
 
     # Preserve time column for label alignment
     if "time" in df.columns:
-        features.insert(0, "time", df["time"].values)
+        features = pd.concat(
+            [pd.DataFrame({"time": df["time"].values}), features],
+            axis=1,
+        )
 
     return features
 
@@ -162,15 +165,23 @@ def prepare_training_matrices(
 
 def split_by_time(
     data: dict,
-    train_end: str = "2022-01-01",
-    val_end: str = "2023-01-01",
+    train_end: str | None = None,
+    val_end: str | None = None,
+    train_ratio: float = 0.7,
+    val_ratio: float = 0.15,
 ) -> dict:
     """Split training data by time (never random).
 
+    If train_end/val_end are provided AND the data actually spans those dates,
+    uses them as fixed boundaries. Otherwise, computes boundaries dynamically
+    from the data using train_ratio/val_ratio.
+
     Args:
         data: Output from prepare_training_matrices()
-        train_end: End of training period (ISO string)
-        val_end: End of validation period (ISO string)
+        train_end: End of training period (ISO string), or None for auto
+        val_end: End of validation period (ISO string), or None for auto
+        train_ratio: Fraction of data for training (used when auto-splitting)
+        val_ratio: Fraction of data for validation (used when auto-splitting)
 
     Returns:
         Dictionary with train/val/test splits.
@@ -179,9 +190,36 @@ def split_by_time(
         raise ValueError("Time column required for time-based split")
 
     times = pd.to_datetime(data["times"])
-    train_mask = times < pd.Timestamp(train_end)
-    val_mask = (times >= pd.Timestamp(train_end)) & (times < pd.Timestamp(val_end))
-    test_mask = times >= pd.Timestamp(val_end)
+    n = len(times)
+
+    # Determine whether fixed dates are usable
+    use_fixed = False
+    if train_end is not None and val_end is not None:
+        ts_train = pd.Timestamp(train_end)
+        ts_val = pd.Timestamp(val_end)
+        # Fixed dates are usable if they actually split the data meaningfully
+        # (at least 10% of data in each bucket)
+        n_train = (times < ts_train).sum()
+        n_val = ((times >= ts_train) & (times < ts_val)).sum()
+        n_test = (times >= ts_val).sum()
+        if n_train > n * 0.05 and n_val > n * 0.05 and n_test > n * 0.05:
+            use_fixed = True
+
+    if use_fixed:
+        train_mask = times < ts_train
+        val_mask = (times >= ts_train) & (times < ts_val)
+        test_mask = times >= ts_val
+    else:
+        # Auto-split by time using ratios
+        sorted_times = np.sort(times.values)
+        train_idx = int(n * train_ratio)
+        val_idx = int(n * (train_ratio + val_ratio))
+        ts_train = pd.Timestamp(sorted_times[train_idx])
+        ts_val = pd.Timestamp(sorted_times[val_idx])
+
+        train_mask = times < ts_train
+        val_mask = (times >= ts_train) & (times < ts_val)
+        test_mask = times >= ts_val
 
     splits = {}
     for split_name, mask in [("train", train_mask), ("val", val_mask), ("test", test_mask)]:

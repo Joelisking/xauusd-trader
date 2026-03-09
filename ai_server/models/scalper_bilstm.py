@@ -158,6 +158,7 @@ class ScalperBiLSTM(BaseModel):
         logger.info(
             "%s: built model — params=%d", self.name, model.count_params()
         )
+        self._model = model
         return model
 
     # ------------------------------------------------------------------

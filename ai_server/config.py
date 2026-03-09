@@ -24,11 +24,11 @@ MAX_REQUESTS_PER_SECOND = 100
 # ---------------------------------------------------------------------------
 # Model file paths
 # ---------------------------------------------------------------------------
-SCALPER_BILSTM_PATH = MODEL_DIR / "gold_scalper_bilstm.h5"
-SWING_BILSTM_PATH = MODEL_DIR / "gold_swing_bilstm.h5"
+SCALPER_BILSTM_PATH = MODEL_DIR / "gold_scalper_bilstm.weights.h5"
+SWING_BILSTM_PATH = MODEL_DIR / "gold_swing_bilstm.weights.h5"
 SCALPER_XGB_PATH = MODEL_DIR / "gold_scalper_xgb.json"
 SWING_XGB_PATH = MODEL_DIR / "gold_swing_xgb.json"
-REGIME_CLF_PATH = MODEL_DIR / "regime_classifier.h5"
+REGIME_CLF_PATH = MODEL_DIR / "regime_classifier.weights.h5"
 NFP_MODEL_PATH = MODEL_DIR / "nfp_direction_xgb.json"
 MODEL_VERSION = "2026-03-01"
 
@@ -36,7 +36,7 @@ MODEL_VERSION = "2026-03-01"
 # Feature engineering
 # ---------------------------------------------------------------------------
 FEATURE_COUNT = 127
-SEQUENCE_LENGTH = 200       # BiLSTM lookback window (candles)
+SEQUENCE_LENGTH = 100       # BiLSTM lookback window (candles) — M1: 100min, H1: ~4 days
 XGB_FEATURE_COUNT = 60      # Tabular features for XGBoost
 
 # ---------------------------------------------------------------------------

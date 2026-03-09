@@ -25,7 +25,6 @@ _DEFAULT_XGB_PARAMS: dict[str, Any] = {
     "subsample": 0.8,
     "colsample_bytree": 0.8,
     "eval_metric": "auc",
-    "use_label_encoder": False,
     "random_state": 42,
     "n_jobs": -1,
 }
